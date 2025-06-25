@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Egen vs Teto Test 💕 - 나의 연애 성향 알아보기</title>
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Egen vs Teto Test 💕 - 나의 연애 성향 알아보기">
+    <meta property="og:description" content="요즘 대세 에겐남/테토남/에겐녀/테토녀! 나는 어떤 연애 스타일일까? 지금 바로 테스트해보세요!">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/FF6B9D/FFFFFF?text=Egen+vs+Teto+Test">
+    <meta property="og:url" content="https://daemo.github.io/egen-teto-test">
+    <meta name="canonical" href="https://daemo.github.io/egen-teto-test">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Egen vs Teto Test 💕">
+    <meta name="twitter:description" content="나는 어떤 연애 스타일일까? 에겐/테토 성향 테스트!">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630/FF6B9D/FFFFFF?text=Egen+vs+Teto+Test">
+    
+    <!-- Mobile App Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Egen vs Teto">
+    <meta name="theme-color" content="#FF6B9D">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            min-height: 100dvh; /* 모바일 브라우저 주소창 고려 */
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation; /* 모바일 터치 최적화 */
+        }
+        
+        /* 배경 애니메이션 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 255, 165, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: floating 20s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-height: 100vh;
+            max-height: 100dvh;
+        }
+        
+        /* 메인 페이지 */
+        .main-page {
+            text-align: center;
+            padding: 60px 0;
+            display: block;
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 50%, #06FFA5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        .main-subtitle {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+        
+        .start-button {
+            background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 100%);
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+            scale: 1.05;
+        }
+        
+        /* 테스트 페이지 */
+        .test-page {
+            display: none;
+            padding: 40px 0;
+        }
+        
+        .progress-container {
+            margin-bottom: 40px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B9D, #A855F7);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+        
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .question-number {
+            color: #FF6B9D;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .question-text {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option-button {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            line-height: 1.5;
+            font-family: 'Pretendard', sans-serif;
+            min-height: 60px; /* 모바일 터치 최적화 */
+            display: flex;
+            align-items: center;
+            -webkit-tap-highlight-color: transparent; /* iOS 탭 하이라이트 제거 */
+        }
+        
+        .option-button:hover {
+            background: rgba(255, 107, 157, 0.1);
+            border-color: #FF6B9D;
+            transform: translateY(-2px);
+        }
+        
+        .option-button.selected {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(168, 85, 247, 0.2));
+            border-color: #FF6B9D;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.3);
+        }
+        
+        /* 결과 페이지 */
+        .result-page {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .result-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .result-type {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .result-description {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .result-details {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .result-details h4 {
+            color: #FF6B9D;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .result-details p {
+            font-family: 'Pretendard', sans-serif;
+            color: #d0d0d0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .result-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .result-details li {
+            font-family: 'Pretendard', sans-serif;
+            color: #d0d0d0;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .result-details li::before {
+            content: '💕';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .share-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .share-button {
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .share-button.kakao {
+            background: linear-gradient(135deg, #FEE500 0%, #FFCD00 100%);
+            color: #3C1E1E;
+        }
+        
+        .share-button.instagram {
+            background: linear-gradient(135deg, #E4405F 0%, #5B51D8 50%, #833AB4 100%);
+        }
+        
+        .share-button.facebook {
+            background: linear-gradient(135deg, #1877F2 0%, #42A5F5 100%);
+        }
+        
+        .share-button.general {
+            background: linear-gradient(135deg, #06FFA5 0%, #A855F7 100%);
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .restart-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .restart-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* 모바일 최적화 */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-subtitle {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .question-card, .result-card {
+                padding: 25px 20px;
+                margin-bottom: 20px;
+            }
+            
+            .option-button {
+                padding: 18px;
+                font-size: 0.95rem;
+            }
+            
+            .start-button {
+                padding: 16px 35px;
+                font-size: 1.1rem;
+            }
+            
+            .share-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .share-button {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+            }
+            
+            .restart-button {
+                padding: 14px 25px;
+                font-size: 0.95rem;
+                margin-top: 15px;
+            }
+        }
+        
+        /* 매우 작은 화면 (iPhone SE 등) */
+        @media (max-width: 375px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 12px;
+            }
+            
+            .question-card, .result-card {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* 세로 모드 최적화 */
+        @media (orientation: portrait) and (max-height: 700px) {
+            .main-page {
+                padding: 40px 0;
+            }
+            
+            .test-page {
+                padding: 20px 0;
+            }
+        }
+        
+        /* 애니메이션 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .question-card, .result-card {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .compatibility {
+            background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(255, 107, 157, 0.1));
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(6, 255, 165, 0.3);
+        }
+        
+        .compatibility h4 {
+            color: #06FFA5;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 메인 페이지 -->
+        <div class="main-page" id="mainPage">
+            <h1 class="main-title">Egen vs Teto</h1>
+            <p class="main-subtitle">나는 어떤 연애 스타일일까?<br>내 성향을 알아보는 심리 테스트</p>
+            <button class="start-button" onclick="startTest()">테스트 시작하기</button>
+        </div>
+        
+        <!-- 테스트 페이지 -->
+        <div class="test-page" id="testPage">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">1 / 12</div>
+            </div>
+            
+            <div class="question-card" id="questionCard">
+                <div class="question-number" id="questionNumber">Question 1</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+            </div>
+        </div>
+        
+        <!-- 결과 페이지 -->
+        <div class="result-page" id="resultPage">
+            <div class="result-card">
+                <span class="result-emoji" id="resultEmoji"></span>
+                <h2 class="result-type" id="resultType"></h2>
+                <p class="result-description" id="resultDescription"></p>
+                
+                <div class="result-details" id="resultDetails"></div>
+                
+                <div class="compatibility" id="compatibility"></div>
+                
+                <div class="share-buttons">
+                    <button class="share-button kakao" onclick="shareKakao()">카카오톡 공유</button>
+                    <button class="share-button instagram" onclick="shareInstagram()">인스타그램 공유</button>
+                    <button class="share-button facebook" onclick="shareFacebook()">페이스북 공유</button>
+                    <button class="share-button general" onclick="shareGeneral()">링크 복사</button>
+                </div>
+                <button class="restart-button" onclick="restartTest()">다시 테스트하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 테스트 데이터
+        const questions = [
+            {
+                text: "좋아하는 사람이 생겼을 때 나는?",
+                options: [
+                    { text: "먼저 다가가서 적극적으로 어필한다", type: "teto", score: 2 },
+                    { text: "은근슬쩍 관심을 표현하며 상대 반응을 본다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "친구들과의 모임에서 나는?",
+                options: [
+                    { text: "분위기를 주도하고 재미있게 이끈다", type: "teto", score: 2 },
+                    { text: "모두가 편안하도록 배려하며 조화를 만든다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "갈등이 생겼을 때 나의 대처 방식은?",
+                options: [
+                    { text: "직접적으로 문제를 해결하려고 한다", type: "teto", score: 2 },
+                    { text: "시간을 두고 간접적으로 해결한다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "데이트할 때 선호하는 스타일은?",
+                options: [
+                    { text: "액티비티가 많은 활동적인 데이트", type: "teto", score: 2 },
+                    { text: "조용하고 깊은 대화를 나누는 데이트", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "새로운 환경에 적응할 때 나는?",
+                options: [
+                    { text: "빠르게 사람들과 어울리며 적응한다", type: "teto", score: 1 },
+                    { text: "천천히 관찰하며 조심스럽게 적응한다", type: "egen", score: 1 }
+                ]
+            },
+            {
+                text: "연인과 의견이 다를 때 나는?",
+                options: [
+                    { text: "솔직하게 내 의견을 표현하고 토론한다", type: "teto", score: 2 },
+                    { text: "상대방 입장을 이해하려고 노력한다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "스트레스를 받을 때 나의 해소 방법은?",
+                options: [
+                    { text: "운동이나 활동적인 것으로 풀어낸다", type: "teto", score: 1 },
+                    { text: "혼자만의 시간을 가지며 정리한다", type: "egen", score: 1 }
+                ]
+            },
+            {
+                text: "친구가 고민을 털어놓을 때 나는?",
+                options: [
+                    { text: "구체적인 해결책을 제시해준다", type: "teto", score: 1 },
+                    { text: "공감하며 감정적으로 위로해준다", type: "egen", score: 1 }
+                ]
+            },
+            {
+                text: "쇼핑할 때 나의 스타일은?",
+                options: [
+                    { text: "빠르게 결정하고 구매한다", type: "teto", score: 1 },
+                    { text: "신중하게 고민하고 비교해본다", type: "egen", score: 1 }
+                ]
+            },
+            {
+                text: "팀 프로젝트에서 나의 역할은?",
+                options: [
+                    { text: "리더십을 발휘해서 팀을 이끈다", type: "teto", score: 2 },
+                    { text: "팀원들을 서포트하며 조율한다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "감정 표현에 있어서 나는?",
+                options: [
+                    { text: "솔직하고 직접적으로 표현한다", type: "teto", score: 2 },
+                    { text: "은은하고 섬세하게 표현한다", type: "egen", score: 2 }
+                ]
+            },
+            {
+                text: "연애에서 가장 중요하게 생각하는 것은?",
+                options: [
+                    { text: "서로의 독립성과 자유로운 관계", type: "teto", score: 2 },
+                    { text: "깊은 유대감과 정서적 안정감", type: "egen", score: 2 }
+                ]
+            }
+        ];
+        
+        // 결과 타입별 설명
+        const resultTypes = {
+            "에겐남": {
+                emoji: "🌸",
+                description: "섬세하고 감성적인 당신은 진정한 에겐남이에요!",
+                details: {
+                    characteristics: "다정하고 배려심이 많으며, 상대방의 감정을 세심하게 읽어내는 능력이 뛰어나요. 갈등보다는 조화를 추구하며, 은은하고 따뜻한 매력을 가지고 있어요.",
+                    love_style: "연애할 때는 상대방을 깊이 이해하려 노력하고, 작은 것도 놓치지 않는 세심함을 보여줘요. 감정적 교감을 중시하며 안정적인 관계를 선호해요.",
+                    strengths: ["뛰어난 공감 능력", "섬세한 배려심", "깊은 감정적 이해", "안정적인 관계 유지"]
+                },
+                compatibility: "테토녀와 가장 잘 맞아요! 테토녀의 활발함과 에겐남의 섬세함이 완벽한 조화를 이룹니다."
+            },
+            "테토남": {
+                emoji: "🔥",
+                description: "활발하고 주도적인 당신은 진정한 테토남이에요!",
+                details: {
+                    characteristics: "리더십이 강하고 직설적이며, 목표 지향적인 성향을 가지고 있어요. 적극적이고 당당한 모습으로 주변 사람들에게 에너지를 주는 타입이에요.",
+                    love_style: "연애할 때는 먼저 다가가고 주도권을 잡는 편이에요. 솔직하고 직접적인 표현을 좋아하며, 함께 목표를 향해 나아가는 관계를 선호해요.",
+                    strengths: ["강한 리더십", "적극적인 추진력", "솔직한 의사소통", "목표 달성 능력"]
+                },
+                compatibility: "에겐녀와 가장 잘 맞아요! 테토남의 리더십과 에겐녀의 서포트가 완벽한 팀워크를 만들어냅니다."
+            },
+            "에겐녀": {
+                emoji: "💝",
+                description: "따뜻하고 지혜로운 당신은 진정한 에겐녀예요!",
+                details: {
+                    characteristics: "눈치가 빠르고 분위기를 잘 읽으며, 조화로운 관계를 만드는 데 뛰어나요. 갈등을 피하고 평화로운 해결책을 찾는 지혜로운 타입이에요.",
+                    love_style: "연애할 때는 상대방을 편안하게 만들어주고, 감정적 안정감을 제공해요. 깊고 의미 있는 관계를 추구하며 서로를 성장시키는 사랑을 해요.",
+                    strengths: ["뛰어난 직감력", "갈등 조율 능력", "정서적 안정감 제공", "깊은 유대감 형성"]
+                },
+                compatibility: "테토남과 가장 잘 맞아요! 에겐녀의 지혜로운 서포트와 테토남의 추진력이 서로를 완성시킵니다."
+            },
+            "테토녀": {
+                emoji: "⚡",
+                description: "독립적이고 당당한 당신은 진정한 테토녀예요!",
+                details: {
+                    characteristics: "활기차고 독립적이며, 자신만의 개성을 확실히 가지고 있어요. 단순하고 직관적인 사고를 하며, 강한 멘탈로 어려움을 극복하는 타입이에요.",
+                    love_style: "연애할 때도 자신의 정체성을 잃지 않으며, 서로의 개성을 존중하는 관계를 만들어가요. 솔직하고 자유로운 사랑을 추구해요.",
+                    strengths: ["강한 독립성", "솔직한 성격", "빠른 판단력", "강인한 정신력"]
+                },
+                compatibility: "에겐남과 가장 잘 맞아요! 테토녀의 당당함과 에겐남의 다정함이 서로를 매력적으로 만듭니다."
+            }
+        };
+        
+        let currentQuestion = 0;
+        let scores = { egen: 0, teto: 0 };
+        let userGender = null;
+        
+        function startTest() {
+            // 성별 선택 (간단하게 처리)
+            userGender = prompt("성별을 선택해주세요 (남/여):");
+            if (!userGender || (userGender !== "남" && userGender !== "여")) {
+                userGender = "남"; // 기본값
+            }
+            
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('testPage').style.display = 'block';
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = question.text;
+            document.getElementById('progressText').textContent = `${currentQuestion + 1} / ${questions.length}`;
+            document.getElementById('progressFill').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-button';
+                button.textContent = option.text;
+                button.onclick = () => selectOption(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+        
+        function selectOption(option) {
+            // 점수 누적
+            scores[option.type] += option.score;
+            
+            // 버튼 시각적 선택 효과
+            document.querySelectorAll('.option-button').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            
+            // 잠시 후 다음 질문으로
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 500);
+        }
+        
+        function showResult() {
+            document.getElementById('testPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'block';
+            
+            // 결과 계산
+            let resultType;
+            if (scores.egen > scores.teto) {
+                resultType = userGender === "남" ? "에겐남" : "에겐녀";
+            } else {
+                resultType = userGender === "남" ? "테토남" : "테토녀";
+            }
+            
+            const result = resultTypes[resultType];
+            
+            // 결과 표시
+            document.getElementById('resultEmoji').textContent = result.emoji;
+            document.getElementById('resultType').textContent = resultType;
+            document.getElementById('resultDescription').textContent = result.description;
+            
+            // 상세 정보 표시
+            const detailsHtml = `
+                <h4>🎯 주요 특징</h4>
+                <p>${result.details.characteristics}</p>
+                
+                <h4>💕 연애 스타일</h4>
+                <p>${result.details.love_style}</p>
+                
+                <h4>✨ 주요 강점</h4>
+                <ul>
+                    ${result.details.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                </ul>
+            `;
+            document.getElementById('resultDetails').innerHTML = detailsHtml;
+            
+            // 궁합 정보
+            document.getElementById('compatibility').innerHTML = `
+                <h4>💫 최고의 궁합</h4>
+                <p>${result.compatibility}</p>
+            `;
+        }
+        
+        // 공유 관련 함수들
+        function getShareData() {
+            const resultType = document.getElementById('resultType').textContent;
+            const resultEmoji = document.getElementById('resultEmoji').textContent;
+            
+            // URL 파라미터로 결과 공유하기
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareUrl = `${baseUrl}?result=${encodeURIComponent(resultType)}`;
+            
+            return {
+                title: 'Egen vs Teto Test 💕',
+                text: `${resultEmoji} 나는 ${resultType}! 나의 연애 성향은? 지금 바로 테스트해보세요!`,
+                url: shareUrl,
+                hashtags: ['에겐테토', '성향테스트', '연애스타일', resultType]
+            };
+        }
+        
+        // 페이지 로드 시 URL 파라미터 확인
+        function checkURLParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedResult = urlParams.get('result');
+            
+            if (sharedResult && resultTypes[sharedResult]) {
+                // 공유된 결과가 있으면 해당 결과 페이지로 바로 이동
+                showSharedResult(sharedResult);
+            }
+        }
+        
+        // 공유된 결과 표시
+        function showSharedResult(resultType) {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('testPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'block';
+            
+            const result = resultTypes[resultType];
+            
+            // 결과 표시
+            document.getElementById('resultEmoji').textContent = result.emoji;
+            document.getElementById('resultType').textContent = resultType;
+            document.getElementById('resultDescription').textContent = result.description + '\n\n👆 이 결과를 공유받았어요! 나도 테스트해보고 싶다면 아래 버튼을 클릭하세요!';
+            
+            // 상세 정보 표시
+            const detailsHtml = `
+                <h4>🎯 주요 특징</h4>
+                <p>${result.details.characteristics}</p>
+                
+                <h4>💕 연애 스타일</h4>
+                <p>${result.details.love_style}</p>
+                
+                <h4>✨ 주요 강점</h4>
+                <ul>
+                    ${result.details.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                </ul>
+            `;
+            document.getElementById('resultDetails').innerHTML = detailsHtml;
+            
+            // 궁합 정보
+            document.getElementById('compatibility').innerHTML = `
+                <h4>💫 최고의 궁합</h4>
+                <p>${result.compatibility}</p>
+            `;
+            
+            // 공유받은 결과임을 표시하기 위해 버튼 텍스트 변경
+            const restartButton = document.querySelector('.restart-button');
+            restartButton.textContent = '나도 테스트하기!';
+            restartButton.style.background = 'linear-gradient(135deg, #FF6B9D 0%, #A855F7 100%)';
+            restartButton.style.color = 'white';
+            restartButton.style.border = 'none';
+        }
+        
+        function shareKakao() {
+            const shareData = getShareData();
+            const kakaoUrl = `https://sharer.kakao.com/talk/friends/?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
+            
+            // 카카오톡 앱이 설치되어 있으면 앱으로, 없으면 웹으로
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                // 모바일에서는 카카오톡 앱 스킴 시도 후 웹으로 폴백
+                const timeout = setTimeout(() => {
+                    window.open(kakaoUrl, '_blank');
+                }, 500);
+                
+                window.location.href = `kakaotalk://send?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`;
+                
+                // 페이지가 숨겨지면 카카오톡 앱이 열린 것으로 판단
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        clearTimeout(timeout);
+                    }
+                });
+            } else {
+                window.open(kakaoUrl, '_blank');
+            }
+        }
+        
+        function shareInstagram() {
+            const shareData = getShareData();
+            // 인스타그램은 직접 링크 공유가 제한적이므로 텍스트를 클립보드에 복사
+            const instagramText = `${shareData.text}\n\n${shareData.url}\n\n${shareData.hashtags.map(tag => '#' + tag).join(' ')}`;
+            
+            navigator.clipboard.writeText(instagramText).then(() => {
+                alert('📋 결과가 복사되었습니다!\n인스타그램을 열어서 스토리나 피드에 붙여넣어 주세요!');
+                
+                // 인스타그램 앱 열기 시도
+                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                    setTimeout(() => {
+                        window.location.href = 'instagram://';
+                    }, 1000);
+                }
+            }).catch(() => {
+                alert('📱 수동으로 복사해주세요:\n' + instagramText);
+            });
+        }
+        
+        function shareFacebook() {
+            const shareData = getShareData();
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}&quote=${encodeURIComponent(shareData.text)}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+        }
+        
+        function shareGeneral() {
+            const shareData = getShareData();
+            
+            if (navigator.share) {
+                // Web Share API 지원하는 경우
+                navigator.share({
+                    title: shareData.title,
+                    text: shareData.text,
+                    url: shareData.url
+                }).catch(console.error);
+            } else {
+                // 클립보드에 복사
+                const textToCopy = shareData.text + '\n' + shareData.url;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // 성공적인 복사 알림
+                    showCopyNotification();
+                }).catch(() => {
+                    // 폴백: 텍스트 선택 가능한 모달 표시
+                    prompt('아래 텍스트를 복사해주세요:', textToCopy);
+                });
+            }
+        }
+        
+        function showCopyNotification() {
+            // 복사 완료 알림 표시
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                z-index: 9999;
+                backdrop-filter: blur(10px);
+                animation: fadeInOut 2s ease-in-out;
+            `;
+            notification.textContent = '📋 링크가 복사되었습니다!';
+            
+            // CSS 애니메이션 추가
+            if (!document.querySelector('#copyNotificationStyle')) {
+                const style = document.createElement('style');
+                style.id = 'copyNotificationStyle';
+                style.textContent = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                        20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                        100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 2000);
+        }
+        
+        function restartTest() {
+            currentQuestion = 0;
+            scores = { egen: 0, teto: 0 };
+            userGender = null;
+            
+            // URL 파라미터 제거
+            const url = new URL(window.location);
+            url.searchParams.delete('result');
+            window.history.replaceState({}, '', url);
+            
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+            
+            // 버튼 원래대로 복원
+            const restartButton = document.querySelector('.restart-button');
+            restartButton.textContent = '다시 테스트하기';
+            restartButton.style.background = 'rgba(255, 255, 255, 0.1)';
+            restartButton.style.color = 'white';
+            restartButton.style.border = '2px solid rgba(255, 255, 255, 0.2)';
+        }
+        
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL 파라미터 확인
+            checkURLParams();
+        });
+    </script>
+</body>
+</html>
